@@ -1,0 +1,6 @@
+r2dbc:
+  url: localhost
+  port: 3306
+  username: kai
+  password: Catmom0121!
+  database: grabber
