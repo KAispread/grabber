@@ -1,5 +1,6 @@
 package com.kaispread.grabber.domain.jd;
 
+import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -16,17 +17,18 @@ public class JobDescription {
     @Id
     private Long id;
 
-    private Long companyId;
-    private String url;
-    private String jobTitle;
-    private Position jobPosition;
+    @NotNull private Long companyId;
+    @NotNull private String url;
+    @NotNull private String jobTitle;
+    @NotNull private Position jobPosition;
+    @NotNull private boolean closeFlag;
+
     private String jobProcess;
     private String requiredSkill;
     private String qualification;
     private String location;
-    private boolean closeFlag;
 
-    @CreatedDate
+    @NotNull @CreatedDate
     private LocalDateTime createdDate;
 
     @Builder

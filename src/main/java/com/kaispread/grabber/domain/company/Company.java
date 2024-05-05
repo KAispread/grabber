@@ -1,5 +1,6 @@
 package com.kaispread.grabber.domain.company;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,9 +15,9 @@ public class Company {
     @Id
     private Long id;
 
-    private String name;
-    private String serviceName;
-    private String recruitmentUrl;
+    @NotNull private String name;
+    @NotNull private String serviceName;
+    @NotNull private String recruitmentUrl;
 
     @Builder
     public Company(String name, String serviceName, String recruitmentUrl) {
