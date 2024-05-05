@@ -19,3 +19,23 @@ spring:
     activate:
       on-profile: local
     import: classpath:/config/local/application-local-db.yml
+
+---
+spring:
+  config:
+    activate:
+      on-profile: develop
+  r2dbc:
+    url: r2dbc:h2:mem:///testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;Mode=MySQL
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+      port: 8079
+  datasource:
+    url: r2dbc:h2:mem:///testdb
+  sql:
+    init:
+      mode: always
+      schema-locations: sql/schema.sql
