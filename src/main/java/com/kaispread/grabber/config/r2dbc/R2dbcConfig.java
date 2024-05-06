@@ -6,11 +6,11 @@ import org.mariadb.r2dbc.MariadbConnectionConfiguration;
 import org.mariadb.r2dbc.MariadbConnectionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.r2dbc.config.AbstractR2dbcConfiguration;
-import org.springframework.data.r2dbc.repository.config.EnableR2dbcRepositories;
 
+@Profile("!develop")
 @RequiredArgsConstructor
-@EnableR2dbcRepositories
 @Configuration
 public class R2dbcConfig extends AbstractR2dbcConfiguration {
 

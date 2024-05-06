@@ -1,5 +1,7 @@
 package com.kaispread.grabber.domain.company;
 
+import com.kaispread.grabber.application.scrap.ScrapperType;
+import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,14 +16,16 @@ public class Company {
     @Id
     private Long id;
 
-    private String name;
-    private String serviceName;
-    private String recruitmentUrl;
+    @NotNull private String name;
+    @NotNull private String serviceName;
+    @NotNull private String recruitmentUrl;
+    @NotNull private ScrapperType scrapperType;
 
     @Builder
-    public Company(String name, String serviceName, String recruitmentUrl) {
+    public Company(String name, String serviceName, String recruitmentUrl, ScrapperType scrapperType) {
         this.name = name;
         this.serviceName = serviceName;
         this.recruitmentUrl = recruitmentUrl;
+        this.scrapperType = scrapperType;
     }
 }
