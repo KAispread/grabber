@@ -20,8 +20,7 @@ public class SimpleApiCaller implements ApiCaller {
         return webClient.get()
             .uri(uri)
             .retrieve()
-            .onStatus(HttpStatusCode::is4xxClientError, clientResponse ->  Mono.error(new ApiCallException()))
-            .onStatus(HttpStatusCode::is5xxServerError, clientResponse ->  Mono.error(new ApiCallException()))
+            .onStatus(HttpStatusCode::isError, clientResponse ->  Mono.error(new ApiCallException(uri)))
             .bodyToMono(responseType);
     }
 }
