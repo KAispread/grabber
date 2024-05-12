@@ -9,4 +9,8 @@ public class ApiCallException extends CustomException {
     public ApiCallException() {
         super(errorCode);
     }
+
+    public ApiCallException(final String uri) {
+        super(errorCode, errorCode.getMessage() + uri);
+    }
 }
