@@ -8,9 +8,9 @@ import lombok.Getter;
 public enum DefaultHeader {
     DEFAULT(new HashMap<>());
 
-    private final Map<Object, Object> map;
+    private final Map<String, String> map;
 
-    DefaultHeader(Map<Object, Object> map) {
+    DefaultHeader(Map<String, String> map) {
         this.map = map;
     }
 }
