@@ -1,4 +1,4 @@
-package com.kaispread.grabber.application.service;
+package com.kaispread.grabber.application.scrap.core;
 
 import com.kaispread.grabber.application.dto.scrap.ScrapJdDto;
 import com.kaispread.grabber.application.scrap.ScrapperFactory;
@@ -9,7 +9,7 @@ import reactor.core.publisher.Flux;
 
 @RequiredArgsConstructor
 @Service
-public class JdScrappingService {
+public class MainScrapper {
 
     private ScrapperFactory scrapperFactory;
     private CompanyRepository companyRepository;
