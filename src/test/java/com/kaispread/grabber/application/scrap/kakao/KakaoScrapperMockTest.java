@@ -9,6 +9,7 @@ import com.kaispread.grabber.application.api.ApiCaller;
 import com.kaispread.grabber.application.dto.company.CompanyDto;
 import com.kaispread.grabber.application.dto.scrap.ScrapJdDto;
 import com.kaispread.grabber.application.json.kakao.KakaoJsonParser;
+import com.kaispread.grabber.exception.ContainsCompanyDataException;
 import com.kaispread.grabber.exception.external.ApiCallException;
 import com.kaispread.grabber.exception.external.DataApiCallException;
 import com.kaispread.grabber.exception.json.DataJsonException;
@@ -119,19 +120,13 @@ class KakaoScrapperMockTest {
 
     private CompanyDto getCompanyDto() {
         return CompanyDto.builder()
-            .id(1L)
+            .id("A001")
             .companyName("카카오")
             .serviceName("카카오 코어")
             .build();
     }
 
-    private Flux<ScrapJdDto> getErrorScrapJdDto(final DataApiCallException exception) {
-        CompanyDto companyDto = exception.getCompanyData();
-        return Flux.just(ScrapJdDto.createApiExceptionDto(companyDto.serviceName(), companyDto.uri()));
-    }
-
-    private Flux<ScrapJdDto> getErrorScrapJdDto(final DataJsonException exception) {
-        CompanyDto companyDto = exception.getCompanyData();
-        return Flux.just(ScrapJdDto.createApiExceptionDto(companyDto.serviceName(), companyDto.uri()));
+    private Flux<ScrapJdDto> getErrorScrapJdDto(final ContainsCompanyDataException exception) {
+        return Flux.just(ScrapJdDto.createExceptionDto(exception));
     }
 }
