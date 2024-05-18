@@ -16,7 +16,6 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class KakaoScrapper implements JobDescriptionScrapper {
 
-    private static final String JOB_URL = "https://careers.kakao.com/public/api/job-list?part=TECHNOLOGY&company=KAKAO&page=1&size=100";
     private static final String JOB_LIST_KEY = "jobList";
 
     private final ApiCaller apiCaller;
@@ -24,8 +23,7 @@ public class KakaoScrapper implements JobDescriptionScrapper {
 
     @Override
     public Flux<ScrapJdDto> scrap(final CompanyDto companyDto, final Map<String, String> header) {
-        return apiCaller.get(JOB_URL, String.class)
-            .log()
+        return apiCaller.get(companyDto.uri(), String.class)
             .onErrorResume(error -> Mono.error(new DataApiCallException(companyDto)))
             .retry(3)
             .flatMap(scrapStr -> Mono.just(parser.parseToJsonObject(scrapStr)))

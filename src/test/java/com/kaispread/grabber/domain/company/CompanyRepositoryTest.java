@@ -26,6 +26,7 @@ class CompanyRepositoryTest extends IntegrationTestSupport {
     void save() {
         // given
         Company company = Company.builder()
+            .id("A001")
             .name("카카오")
             .serviceName("카카오코어")
             .recruitmentUrl("test.url")

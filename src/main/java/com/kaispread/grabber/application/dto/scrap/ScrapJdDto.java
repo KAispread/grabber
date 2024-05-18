@@ -1,16 +1,23 @@
 package com.kaispread.grabber.application.dto.scrap;
 
+import com.kaispread.grabber.application.dto.company.CompanyDto;
 import com.kaispread.grabber.application.dto.error.ApiCallScrapError;
+import com.kaispread.grabber.application.dto.error.DefaultScrapError;
 import com.kaispread.grabber.application.dto.error.JsonParseError;
 import com.kaispread.grabber.application.dto.error.ScrapError;
+import com.kaispread.grabber.domain.jd.JobDescription;
 import com.kaispread.grabber.domain.jd.Position;
+import com.kaispread.grabber.exception.ContainsCompanyDataException;
+import com.kaispread.grabber.exception.convert.ConvertJobDescriptionException;
+import com.kaispread.grabber.exception.external.DataApiCallException;
+import com.kaispread.grabber.exception.json.DataJsonException;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import org.springframework.util.StringUtils;
 
 @Builder
 public record ScrapJdDto (
-    @NotNull Long companyId,
+    @NotNull String companyId,
     @NotNull String jdId,
     @NotNull String jdUrl,
     @NotNull String jdTitle,
@@ -26,6 +33,22 @@ public record ScrapJdDto (
 
     ScrapError error
 ) {
+
+    public JobDescription toJdEntity() {
+        if (isInvalidDto()) throw new ConvertJobDescriptionException();
+        return JobDescription.builder()
+            .companyId(companyId)
+            .jobId(jdId)
+            .url(jdUrl)
+            .jobTitle(jdTitle)
+            .jobPosition(position)
+            .introduction(introduction)
+            .jobProcess(jobProcess)
+            .requiredSkill(requiredSkill)
+            .qualification(qualification)
+            .location(location)
+            .build();
+    }
 
     public boolean isError() {
         return error != null;
@@ -46,8 +69,16 @@ public record ScrapJdDto (
         return !isInvalidDto();
     }
 
-    public static ScrapJdDto createApiExceptionDto(final String serviceName, final String uri) {
+    public static ScrapJdDto createExceptionDto(final ContainsCompanyDataException e) {
+        CompanyDto companyData = e.getCompanyData();
+        if (e instanceof DataApiCallException) return createApiExceptionDto(companyData.serviceName(), companyData.uri());
+        if (e instanceof DataJsonException) return createJsonExceptionDto(companyData.serviceName(), companyData.uri());
+        return createDefaultExceptionDto(companyData.serviceName(), companyData.uri());
+    }
+
+    private static ScrapJdDto createApiExceptionDto(final String serviceName, final String uri) {
         return ScrapJdDto.builder()
+            .companyId("EEEE")
             .error(ApiCallScrapError.builder()
                 .serviceName(serviceName)
                 .url(uri)
@@ -55,9 +86,20 @@ public record ScrapJdDto (
             ).build();
     }
 
-    public static ScrapJdDto createJsonExceptionDto(final String serviceName, final String uri) {
+    private static ScrapJdDto createJsonExceptionDto(final String serviceName, final String uri) {
         return ScrapJdDto.builder()
+            .companyId("EEEE")
             .error(JsonParseError.builder()
+                .serviceName(serviceName)
+                .url(uri)
+                .build()
+            ).build();
+    }
+
+    private static ScrapJdDto createDefaultExceptionDto(final String serviceName, final String uri) {
+        return ScrapJdDto.builder()
+            .companyId("EEEE")
+            .error(DefaultScrapError.builder()
                 .serviceName(serviceName)
                 .url(uri)
                 .build()

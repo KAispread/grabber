@@ -1,10 +1,11 @@
 CREATE TABLE IF NOT EXISTS `company`
 (
-    `id`           integer(10)              NOT NULL AUTO_INCREMENT,
-    `name`         varchar(255)             NOT NULL COMMENT '회사명',
-    `service_name` varchar(255)             NOT NULL COMMENT '서비스명',
-    `recruitment_url` varchar(255)          NOT NULL,
-    `scrapper_type`   varchar(100)          NOT NULL,
+    `id`                char(4)                 NOT NULL COMMENT '회사 ID ex) A001',
+    `name`              varchar(255)            NOT NULL COMMENT '회사명',
+    `service_name`      varchar(255)            NOT NULL COMMENT '서비스명',
+    `recruitment_url`   varchar(255)            NOT NULL,
+    `scrapper_type`     varchar(100)            NOT NULL,
+    `created_date`      DATETIME DEFAULT NOW()  NOT NULL COMMENT '생성일',
 
     PRIMARY KEY (id),
     UNIQUE KEY (recruitment_url)
@@ -13,7 +14,7 @@ CREATE TABLE IF NOT EXISTS `company`
 CREATE TABLE IF NOT EXISTS `job_description`
 (
     `id`             int                    NOT NULL AUTO_INCREMENT,
-    `company_id`     int                    NOT NULL,
+    `company_id`     char(4)                NOT NULL,
 
     `job_id`         varchar(100)           NOT NULL COMMENT '각 채용 공고에 할당된 고유 ID',
     `url`            varchar(255)           NOT NULL COMMENT 'JD URL',
@@ -27,6 +28,18 @@ CREATE TABLE IF NOT EXISTS `job_description`
     `close_flag`     tinyint                NOT NULL COMMENT '마감 여부',
     `created_date`   DATETIME DEFAULT NOW() NOT NULL COMMENT '생성일',
 
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    FOREIGN KEY (company_id) REFERENCES `company`(`id`)
 );
 CREATE INDEX idx_job_id_company_id ON `job_description`(job_id, company_id);
+
+CREATE TABLE IF NOT EXISTS `exception_event`
+(
+    `id`            int                     NOT NULL AUTO_INCREMENT,
+    `company_id`    char(4)                 NOT NULL,
+    `exception`     varchar(40)             COMMENT '예외 종류',
+    `description`   varchar(255)            COMMENT '예외 설명',
+    `created_date`  DATETIME DEFAULT NOW()  NOT NULL COMMENT '생성일',
+
+    PRIMARY KEY (id)
+);

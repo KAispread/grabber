@@ -17,7 +17,7 @@ public class JobDescription {
     @Id
     private Long id;
 
-    @NotNull private Long companyId;
+    @NotNull private String companyId;
     @NotNull private String jobId;
     @NotNull private String url;
     @NotNull private String jobTitle;
@@ -34,9 +34,9 @@ public class JobDescription {
     private LocalDateTime createdDate;
 
     @Builder
-    public JobDescription(Long companyId, String jobId, String url, String jobTitle, Position jobPosition,
+    public JobDescription(String companyId, String jobId, String url, String jobTitle, Position jobPosition,
                           String jobProcess, String requiredSkill, String qualification,
-                          String location, boolean closeFlag, String introduction) {
+                          String location, String introduction) {
         this.companyId = companyId;
         this.jobId = jobId;
         this.url = url;
@@ -46,7 +46,7 @@ public class JobDescription {
         this.requiredSkill = requiredSkill;
         this.qualification = qualification;
         this.location = location;
-        this.closeFlag = closeFlag;
         this.introduction = introduction;
+        this.closeFlag = false;
     }
 }
