@@ -33,7 +33,7 @@ class KakaoScrapperTest extends IntegrationTestSupport {
 
     private CompanyDto getCompanyDto() {
         return CompanyDto.builder()
-            .id(1L)
+            .id("A0001")
             .companyName("카카오")
             .serviceName("카카오 코어")
             .build();
