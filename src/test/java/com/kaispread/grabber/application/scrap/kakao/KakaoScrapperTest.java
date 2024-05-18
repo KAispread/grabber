@@ -6,6 +6,7 @@ import com.kaispread.grabber.application.dto.company.CompanyDto;
 import com.kaispread.grabber.application.dto.scrap.ScrapJdDto;
 import com.kaispread.grabber.application.scrap.JobDescriptionScrapper;
 import com.kaispread.grabber.base.support.IntegrationTestSupport;
+import com.kaispread.grabber.domain.company.CompanyRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,9 @@ import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
 
 class KakaoScrapperTest extends IntegrationTestSupport {
+
+    @Autowired
+    CompanyRepository companyRepository;
 
     @Autowired
     JobDescriptionScrapper kakaoScrapper;
@@ -33,9 +37,10 @@ class KakaoScrapperTest extends IntegrationTestSupport {
 
     private CompanyDto getCompanyDto() {
         return CompanyDto.builder()
-            .id("A0001")
-            .companyName("카카오")
-            .serviceName("카카오 코어")
+            .id("A001")
+            .companyName("kakao")
+            .serviceName("kakao talk")
+            .uri("https://careers.kakao.com/public/api/job-list?part=TECHNOLOGY&company=KAKAO&page=1&size=100")
             .build();
     }
 }
