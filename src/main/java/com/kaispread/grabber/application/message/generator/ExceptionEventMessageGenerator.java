@@ -1,4 +1,4 @@
-package com.kaispread.grabber.application.message;
+package com.kaispread.grabber.application.message.generator;
 
 import com.kaispread.grabber.domain.company.Company;
 import com.kaispread.grabber.domain.company.CompanyRepository;

@@ -1,5 +1,6 @@
 package com.kaispread.grabber.application.message;
 
+import com.kaispread.grabber.application.message.generator.ExceptionEventMessageGenerator;
 import com.kaispread.grabber.application.scrap.ScrapperType;
 import com.kaispread.grabber.base.support.IntegrationTestSupport;
 import com.kaispread.grabber.domain.company.Company;
