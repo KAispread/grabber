@@ -1,6 +1,7 @@
 package com.kaispread.grabber.domain.event;
 
 import jakarta.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -22,7 +23,7 @@ public class ExceptionEvent {
     private String description;
 
     @NotNull @CreatedDate
-    private LocalDateTime createdDate;
+    private LocalDate createdDate;
 
     @Builder
     public ExceptionEvent(@NotNull String companyId, String exception, String description) {

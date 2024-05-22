@@ -13,4 +13,7 @@ public interface SlackNotificationSender {
 
     @PostExchange(url = "/T073P744H8F/B0743QKC9DG/4kGa3j5TQqtT8PYqEEedcAvk")
     Mono<String> postToTestChannel(@RequestBody SlackMessage message);
+
+    @PostExchange(url = "/T073P744H8F/B074PKVCG3E/ctO4CnQH5B6iPIjugvyuovPv")
+    Mono<String> postToExceptionChannel(@RequestBody SlackMessage message);
 }
