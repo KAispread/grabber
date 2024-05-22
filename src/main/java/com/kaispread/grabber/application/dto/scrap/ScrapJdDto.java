@@ -23,6 +23,7 @@ public record ScrapJdDto (
     @NotNull String jdTitle,
     @NotNull Position position,
     @NotNull String serviceName,
+    @NotNull String serviceNameKr,
 
     String companyName,
     String jobProcess,

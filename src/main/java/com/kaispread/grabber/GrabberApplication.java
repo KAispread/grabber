@@ -1,5 +1,7 @@
 package com.kaispread.grabber;
 
+import jakarta.annotation.PostConstruct;
+import java.util.TimeZone;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -10,4 +12,9 @@ public class GrabberApplication {
         SpringApplication.run(GrabberApplication.class, args);
     }
 
+    @PostConstruct
+    public void init() {
+        // Timezone setting
+        TimeZone.setDefault(TimeZone.getTimeZone("Asia/Seoul"));
+    }
 }

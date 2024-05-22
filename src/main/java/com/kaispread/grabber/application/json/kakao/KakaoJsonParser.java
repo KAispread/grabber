@@ -41,6 +41,7 @@ public class KakaoJsonParser extends CustomJsonParser {
         return ScrapJdDto.builder()
             .companyId(companyDto.id())
             .serviceName(companyDto.serviceName())
+            .serviceNameKr(companyDto.serviceNameKr())
             .companyName(companyDto.companyName())
             .jdId(jobId)
             .jdUrl(String.format(URL_FORMAT, jobId))
