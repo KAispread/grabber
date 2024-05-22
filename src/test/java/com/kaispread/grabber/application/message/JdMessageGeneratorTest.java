@@ -3,6 +3,7 @@ package com.kaispread.grabber.application.message;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.kaispread.grabber.application.dto.scrap.ScrapJdDto;
+import com.kaispread.grabber.application.message.generator.JdMessageGenerator;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,7 +17,7 @@ class JdMessageGeneratorTest {
         MockJdMessageGenerator messageGenerator = new MockJdMessageGenerator();
 
         // when
-        String result = messageGenerator.getHeadLine("Daily");
+        String result = messageGenerator.mockGetHeadLine("Daily");
 
         // then
         System.out.println(result);
@@ -32,7 +33,7 @@ class JdMessageGeneratorTest {
         List<ScrapJdDto> serviceScrapList = getServiceScrapList();
 
         // when
-        String messageBody = messageGenerator.getMessagePerService(serviceName, serviceScrapList);
+        String messageBody = messageGenerator.mockGetMessagePerService(serviceName, serviceScrapList);
 
         // then
         System.out.println(messageBody);
@@ -57,5 +58,12 @@ class JdMessageGeneratorTest {
     }
 
     static class MockJdMessageGenerator extends JdMessageGenerator {
+        public String mockGetHeadLine(String channelName) {
+            return getHeadLine(channelName);
+        }
+
+        public String mockGetMessagePerService(String companyName, List<ScrapJdDto> serviceScrapList) {
+            return getMessagePerService(companyName, serviceScrapList);
+        }
     }
 }

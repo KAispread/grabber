@@ -1,6 +1,7 @@
 package com.kaispread.grabber.application.message;
 
 import com.kaispread.grabber.application.dto.scrap.ScrapJdDto;
+import com.kaispread.grabber.application.message.generator.NewEventMessageGenerator;
 import com.kaispread.grabber.base.support.IntegrationTestSupport;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

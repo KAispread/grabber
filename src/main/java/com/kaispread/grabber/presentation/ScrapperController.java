@@ -1,6 +1,6 @@
 package com.kaispread.grabber.presentation;
 
-import com.kaispread.grabber.application.scrap.core.MainScrapper;
+import com.kaispread.grabber.application.service.ScrapNotificationSender;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,11 +11,10 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/v1/scrap")
 @RestController
 public class ScrapperController {
-    private final MainScrapper mainScrapper;
+    private final ScrapNotificationSender scrapNotificationSender;
 
     @PostMapping
     public Mono<Void> post() {
-        return mainScrapper.runScrapping()
-                           .then();
+        return scrapNotificationSender.scrapAndSend();
     }
 }
