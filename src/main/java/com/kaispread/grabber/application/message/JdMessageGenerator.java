@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
+import reactor.core.publisher.Mono;
 
 /*
 For Example
@@ -22,7 +23,7 @@ https://recruit.navercorp.com/rcrt/view.do?annoId=30002082&lang=ko
 public abstract class JdMessageGenerator {
 
     // No Event Message
-    protected static final String NO_EVENT = "오늘은 새로운 공고를 찾지 못했습니다";
+    private static final String NO_EVENT = "오늘은 새로운 공고를 찾지 못했습니다";
 
     // Format
     private static final String HEAD_LINE = "[%s 신규 채용 공고] (%s)";
@@ -45,13 +46,31 @@ public abstract class JdMessageGenerator {
     * [토스] 토스 Data 공개채용_Data Analyst [대출사업]
     * https://toss.im/career/job-detail?gh_jid=5988626003
     * */
-    protected String getMessageBody(final String serviceName, final List<ScrapJdDto> scrapJdDtoList) {
+    protected String getMessagePerService(final String companyName, final List<ScrapJdDto> scrapJdDtoList) {
         String jobDetails = scrapJdDtoList.stream()
             .map(jd -> String.format(TITLE_JOB_DESCRIPTION,
-                jd.companyName(),
+                jd.serviceName(),
                 jd.jdTitle(),
                 jd.jdUrl()))
             .collect(Collectors.joining("\n"));
-        return String.format(TITLE_SERVICE_NAME_FORMAT, serviceName, jobDetails);
+        return String.format(TITLE_SERVICE_NAME_FORMAT, companyName, jobDetails);
+    }
+
+    /*
+    * 새로운 공고가 없을 때 메시지 생성
+    * [5월 21일 신규 채용 공고] (Daily)
+    * 오늘은 새로운 공고를 찾지 못했습니다
+    * */
+    protected Mono<List<String>> getNoEventMessage() {
+        return Mono.just(List.of(NO_EVENT));
+    }
+
+    /*
+    * 헤드라인과 메시지를 합쳐서 반환
+    * */
+    protected String getTotalMessage(final String channelName, final List<String> messagePerCompany) {
+        return String.join("\n",
+            getHeadLine(channelName),
+            String.join("\n\n", messagePerCompany));
     }
 }

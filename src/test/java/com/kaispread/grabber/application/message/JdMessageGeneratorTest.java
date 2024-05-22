@@ -25,14 +25,14 @@ class JdMessageGeneratorTest {
 
     @DisplayName("서비스별 공고 문구를 생성할 수 있다.")
     @Test
-    void getMessageBody() {
+    void getMessagePerService() {
         // given
         MockJdMessageGenerator messageGenerator = new MockJdMessageGenerator();
         String serviceName = "Toss";
         List<ScrapJdDto> serviceScrapList = getServiceScrapList();
 
         // when
-        String messageBody = messageGenerator.getMessageBody(serviceName, serviceScrapList);
+        String messageBody = messageGenerator.getMessagePerService(serviceName, serviceScrapList);
 
         // then
         System.out.println(messageBody);
