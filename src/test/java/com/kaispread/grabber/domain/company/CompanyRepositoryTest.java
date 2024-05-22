@@ -27,8 +27,9 @@ class CompanyRepositoryTest extends IntegrationTestSupport {
         // given
         Company company = Company.builder()
             .id("A001")
-            .name("카카오")
-            .serviceName("카카오코어")
+            .name("kakao")
+            .serviceName("kakao core")
+            .serviceNameKr("카카오 코어")
             .recruitmentUrl("test.url")
             .scrapperType(KAKAO_CORE)
             .build();
@@ -43,7 +44,7 @@ class CompanyRepositoryTest extends IntegrationTestSupport {
 
         Flux<Company> allCompanies = repository.findAll();
         StepVerifier.create(allCompanies)
-            .expectNextMatches(savedCompany -> savedCompany.getName().equals("카카오"))
+            .expectNextMatches(savedCompany -> savedCompany.getName().equals("kakao"))
             .verifyComplete();
     }
 }

@@ -49,6 +49,7 @@ class JobDescriptionRepositoryTest extends IntegrationTestSupport {
                 .id("A001")
                 .name("kakao")
                 .serviceName("kakao core")
+                .serviceNameKr("카카오 코어")
                 .recruitmentUrl("mock.url")
                 .scrapperType(ScrapperType.KAKAO_CORE)
                 .build());
