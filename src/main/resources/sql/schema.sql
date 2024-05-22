@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `exception_event`
     `company_id`    char(4)                 NOT NULL,
     `exception`     varchar(40)             COMMENT '예외 종류',
     `description`   varchar(255)            COMMENT '예외 설명',
-    `created_date`  DATETIME DEFAULT NOW()  NOT NULL COMMENT '생성일',
+    `created_date`  DATE DEFAULT NOW()  NOT NULL COMMENT '생성일',
 
     PRIMARY KEY (id)
 );
