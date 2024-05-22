@@ -3,6 +3,7 @@ CREATE TABLE IF NOT EXISTS `company`
     `id`                char(4)                 NOT NULL COMMENT '회사 ID ex) A001',
     `name`              varchar(255)            NOT NULL COMMENT '회사명',
     `service_name`      varchar(255)            NOT NULL COMMENT '서비스명',
+    `service_name_kr`   varchar(255)            NOT NULL COMMENT '서비스명 (한글)',
     `recruitment_url`   varchar(255)            NOT NULL,
     `scrapper_type`     varchar(100)            NOT NULL,
     `created_date`      DATETIME DEFAULT NOW()  NOT NULL COMMENT '생성일',

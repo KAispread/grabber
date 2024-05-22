@@ -9,6 +9,7 @@ public record CompanyDto (
     String id,
     String companyName,
     String serviceName,
+    String serviceNameKr,
     String uri,
     ScrapperType scrapperType
 ) {
@@ -17,6 +18,7 @@ public record CompanyDto (
             .id(company.getId())
             .companyName(company.getName())
             .serviceName(company.getServiceName())
+            .serviceNameKr(company.getServiceNameKr())
             .uri(company.getRecruitmentUrl())
             .scrapperType(company.getScrapperType())
             .build();

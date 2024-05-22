@@ -21,16 +21,18 @@ public class Company implements Persistable<String> {
 
     @NotNull private String name;
     @NotNull private String serviceName;
+    @NotNull private String serviceNameKr;
     @NotNull private String recruitmentUrl;
     @NotNull private ScrapperType scrapperType;
 
     @CreatedDate private LocalDateTime createdDate;
 
     @Builder
-    public Company(String id, String name, String serviceName, String recruitmentUrl, ScrapperType scrapperType) {
+    public Company(String id, String name, String serviceName, String serviceNameKr, String recruitmentUrl, ScrapperType scrapperType) {
         this.id = id;
         this.name = name;
         this.serviceName = serviceName;
+        this.serviceNameKr = serviceNameKr;
         this.recruitmentUrl = recruitmentUrl;
         this.scrapperType = scrapperType;
     }
