@@ -1,4 +1,4 @@
-package com.kaispread.grabber.presentation;
+package com.kaispread.grabber.trigger.controller;
 
 import com.kaispread.grabber.application.service.ScrapNotificationSender;
 import lombok.RequiredArgsConstructor;
