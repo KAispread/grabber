@@ -1,0 +1,3 @@
+[submodule "src/main/resources/config/secure"]
+	path = src/main/resources/config/secure
+	url = https://github.com/KAispread/grabber_secret.git
