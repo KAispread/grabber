@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.r2dbc.config.AbstractR2dbcConfiguration;
 
-@Profile("!develop")
+@Profile("local")
 @RequiredArgsConstructor
 @Configuration
 public class R2dbcConfig extends AbstractR2dbcConfiguration {
